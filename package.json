@@ -1,0 +1,20 @@
+{
+  "name": "pos-system",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,green \"npm run dev --workspace @pos/web\" \"npm run dev --workspace @pos/api\"",
+    "build": "npm run build --workspace @pos/api && npm run build --workspace @pos/web",
+    "test": "npm run test --workspace @pos/api && npm run test --workspace @pos/web",
+    "lint": "npm run lint --workspace @pos/api && npm run lint --workspace @pos/web",
+    "format": "prettier --write \"**/*.{json,jsonc,md,yml,yaml,ts,tsx,css,html}\"",
+    "format:check": "prettier --check \"**/*.{json,jsonc,md,yml,yaml,ts,tsx,css,html}\"",
+    "db:migrate": "npm run db:migrate --workspace @pos/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2"
+  }
+}
