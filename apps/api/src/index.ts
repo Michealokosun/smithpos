@@ -1,7 +1,7 @@
-import { createApp } from "./app.js";
+import app from "./app.js";
 
 const port = Number(process.env.PORT ?? 3001);
 
-createApp().listen(port, () => {
+app.listen(port, () => {
   console.log(`POS API listening on http://localhost:${port}`);
 });
