@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { randomUUID } from "node:crypto";
 import readline from "node:readline";
 import { z } from "zod";

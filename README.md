@@ -30,6 +30,8 @@ Product and sale monetary values are stored in `bigint` columns representing int
    node -e "console.log(require('node:crypto').randomBytes(48).toString('base64url'))"
    ```
 
+The API loads this `.env` from the repository root, including when you run npm workspace commands from the root. Environment variables already provided by the hosting platform take precedence.
+
 3. Start PostgreSQL:
 
    ```powershell
