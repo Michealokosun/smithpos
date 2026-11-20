@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import helmet from "helmet";
+import { default as helmet } from "helmet";
 import { authRouter } from "./auth/routes.js";
 import { userRouter } from "./auth/user-routes.js";
 
