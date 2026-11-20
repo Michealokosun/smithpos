@@ -1,14 +1,17 @@
+import { createRequire } from "node:module";
 import cors from "cors";
 import express from "express";
-import * as helmet from "helmet";
 import { authRouter } from "./auth/routes.js";
 import { userRouter } from "./auth/user-routes.js";
+
+const require = createRequire(import.meta.url);
+const helmet = require("helmet") as () => express.RequestHandler;
 
 export function createApp() {
   const app = express();
 
   app.disable("x-powered-by");
-  app.use(helmet.default());
+  app.use(helmet());
   app.use(
     cors({
       origin: process.env.WEB_ORIGIN ?? "http://localhost:5173",
