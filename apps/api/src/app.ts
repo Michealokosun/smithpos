@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import { default as helmet } from "helmet";
+import * as helmet from "helmet";
 import { authRouter } from "./auth/routes.js";
 import { userRouter } from "./auth/user-routes.js";
 
@@ -8,7 +8,7 @@ export function createApp() {
   const app = express();
 
   app.disable("x-powered-by");
-  app.use(helmet());
+  app.use(helmet.default());
   app.use(
     cors({
       origin: process.env.WEB_ORIGIN ?? "http://localhost:5173",
