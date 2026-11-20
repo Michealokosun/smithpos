@@ -24,25 +24,39 @@ Product and sale monetary values are stored in `bigint` columns representing int
 ## Setup
 
 1. Copy `.env.example` to `.env`.
-2. Start PostgreSQL:
+2. Set `ACCESS_TOKEN_SECRET` in `.env` to a random secret of at least 32 bytes. In PowerShell, generate one with:
+
+   ```powershell
+   node -e "console.log(require('node:crypto').randomBytes(48).toString('base64url'))"
+   ```
+
+3. Start PostgreSQL:
 
    ```powershell
    docker compose up -d postgres
    ```
 
-3. Install dependencies:
+4. Install dependencies:
 
    ```powershell
    npm.cmd install
    ```
 
-4. Apply migrations:
+5. Apply migrations:
 
    ```powershell
    npm.cmd run db:migrate
    ```
 
-5. Start the web app and API:
+6. Create the first administrator:
+
+   ```powershell
+   npm.cmd run auth:create-admin --workspace @pos/api
+   ```
+
+   This is allowed only while the users table is empty. The password is entered without being shown in the terminal.
+
+7. Start the web app and API:
 
    ```powershell
    npm.cmd run dev
@@ -50,6 +64,8 @@ Product and sale monetary values are stored in `bigint` columns representing int
 
 - Web: http://localhost:5173
 - API health: http://localhost:3001/api/health
+
+The sign-in screen has no public registration. Administrators can create manager or cashier accounts, and managers can create cashier accounts. Staff accounts must change their temporary password at first sign-in. Access tokens expire after 15 minutes and are held in memory; rotating refresh tokens are stored only as hashes in the database and delivered via an HTTP-only cookie. A sign-in session expires after one day.
 
 ## Commands
 
